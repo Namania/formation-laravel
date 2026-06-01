@@ -16,8 +16,9 @@ class TaskController extends Controller
     public function index()
     {
         return TaskResource::collection(
-            Task::when(request('status'), fn($q,$s) => $q->where('status',$s))
-            ->paginate(10)
+            Task::query()
+                ->when(request('status'), fn($q,$s) => $q->where('status',$s))
+                ->paginate(10)
         );
     }
 
@@ -26,8 +27,7 @@ class TaskController extends Controller
      */
     public function store(StoreTaskRequest $request)
     {
-        Task::create($request->validated());
-        return response(status: 201);
+        return response()->json(new TaskResource(Task::create($request->validated())), 201);
     }
 
     /**
