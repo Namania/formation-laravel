@@ -23,6 +23,12 @@ RUN docker-php-ext-install \
 # Extension Redis
 RUN pecl install redis && docker-php-ext-enable redis
 
+# Laravel Dust
+RUN apt-get update && apt-get install -y \
+    chromium \
+    chromium-driver \
+    && rm -rf /var/lib/apt/lists/*
+
 # Composer
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
