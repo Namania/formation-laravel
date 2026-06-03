@@ -16,6 +16,9 @@
             </a> <div class="flex items-center gap-4">
 
             <div class="flex items-center gap-4">
+                @if(auth()->user()?->isAdmin())
+                    <a href="{{ route('newsletters.index') }}">Newsletters</a>
+                @endif
                 @auth
                     <a href="{{ route('dashboard') }}"
                        class="text-sm text-gray-600 hover:text-gray-900">

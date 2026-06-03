@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\NewsletterController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\PreferenceController;
 use App\Http\Controllers\StatsController;
@@ -20,6 +21,8 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::resource('posts', PostController::class);
     Route::get('/preferences', [PreferenceController::class, 'index'])->name('preferences.index');
     Route::post('/preferences', [PreferenceController::class, 'store'])->name('preferences.store');
+    Route::resource('newsletters', NewsletterController::class)
+        ->only(['index', 'create', 'store']);
 });
 
 Route::get('/stats', [StatsController::class, 'index'])->name('stats.index');
