@@ -1,10 +1,14 @@
 <x-app-layout>
 
     <x-slot name="header">
-        <h2 class="text-xl font-semibold text-gray-800">
-            Tableau de bord
-        </h2>
+        Tableau de bord
     </x-slot>
+
+    @if(session('success'))
+        <x-alert class="mb-3">
+            {{ session('success') }}
+        </x-alert>
+    @endif
 
     <div class="rounded-xl border bg-white p-6 shadow-sm">
         <h1 class="text-2xl font-bold text-gray-900">
