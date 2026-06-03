@@ -17,13 +17,19 @@ it('forbids user from updating others post', function () {
 });
 
 it('allows admin to update any post', function () {
-    $admin = User::factory()->create(['role' => 'admin']);
+    $this->seed('RoleSeeder');
+    $admin = User::factory()->create();
+    $admin->assignRole('admin');
+
     $post = Post::factory()->create();
     expect($admin->can('update', $post))->toBeTrue();
 });
 
 it('allows admin to delete any post', function () {
-    $admin = User::factory()->create(['role' => 'admin']);
+    $this->seed('RoleSeeder');
+    $admin = User::factory()->create();
+    $admin->assignRole('admin');
+
     $post = Post::factory()->create();
     expect($admin->can('delete', $post))->toBeTrue();
 });
